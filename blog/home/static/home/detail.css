@@ -1,0 +1,54 @@
+#article{
+  margin: 2em;
+}
+
+#post-labels #publish-date{
+  color: grey;
+  margin-bottom:  2em;
+  display: block;
+}
+#profile-image{
+  display: inline-block;
+  vertical-align:top
+}
+#profile-image img{
+  border-radius: 50%;
+  width: 3em;
+  height: 3em;
+  margin-right: 0.2em;
+}
+#post-labels{
+  display:inline-block;
+}
+#comments{
+  margin: 1em 0 ;
+  display: none;
+}
+#comments-number{
+  cursor: pointer;
+  color: grey;
+}
+h4{
+  margin: 1em 0 ;
+  display: inline;
+}
+
+.comment-date{
+  color: grey;
+}
+.user-img{
+  display: inline-block;
+  vertical-align:top;
+}
+.user-img img{
+  border-radius: 50%;
+  height: 2em;
+  width: 2em;
+}
+.user-name{
+  display:inline-block;
+}
+.comment-body{
+padding: 0.5em 1em;
+word-break: break-word;
+}

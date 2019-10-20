@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load static %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+
+{% block title %} {% endblock title %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'home/detail.css' %}">
+{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col col-lg-8 col-md-9 col-sm-10 col-10">
+        <div id="article">
+          <div id="profile-image">
+            <img src="{% static 'home/images/user.jpeg' %}">
+          </div>
+          <div id="post-labels">
+            <h1 id="post-title">{{post.title}}</h1>
+            <small id="publish-date"> {{post.publish}} by {{post.author.username}}</small>
+          </div>
+
+        <p id="post-body">
+          {{post.body}}
+        </p>
+        <p><a href="{% url 'home:post_share' post.id %}">Share by Email</a></p>
+
+            {% with comments.count as total_comments %}
+              <h4>{{	total_comments	}}	comment{{	total_comments|pluralize	}}</h4>
+              <small id="comments-number">show all</small>
+            {% endwith %}
+            <hr>
+            <div id="comments">
+            {% for comment in comments %}
+            <div class="comment">
+              <div class="comment-user">
+                <div class="user-img"><img src="{% static 'home/images/user.png' %}" alt="user-img"></div>
+                <div class="user-name"><strong>{{comment.user.username}}</strong></div>
+              </div>
+              <p><small class="comment-date">{{comment.created}}</small></p>
+
+              <div class="comment-body">
+                <p class="mb-0">{{comment.body}}</p>
+              </div>
+            </div>
+            <hr>
+            {% endfor %}
+          </div>
+
+          {% if new_comment %}
+          <div class="alert alert-success" role="alert">Your comment has been added.</div>
+          {% endif %}
+          <form action="." method="POST">{% csrf_token %}
+            {% bootstrap_field comment_form.body show_label=Flase placeholder='add your comment.' %}
+            <button type="submit" class="btn btn-md btn-info" name="button">Comment</button>
+          </form>
+
+
+    </div>
+  </div>
+</div>
+</div>
+
+{% endblock %}
+{% block js %}
+<script src="{% static "home/detail.js" %}"></script>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript jquery='full' %}
+{% block title %}Share Post {% endblock %}
+{% block css %}
+  <link rel="stylesheet" href="{% static 'home/home.css' %}">
+{% endblock %}
+{% block content %}
+{% if sent %}
+
+<div class="container">
+<div class="row justify-content-center">
+  <div class="col-10">
+
+    <div class="alert alert-success align-items-center" role="alert">
+      	<h2 class="alert-heading">E-mail	successfully	sent</h2>
+        <hr>
+        <p class="mb-0">
+          "{{post.title}}" was	successfully	sent	to {{form.cleaned_data.to}}. <strong><a href="{% url "home:post_list" %}" class="alert-link">Back to Home</a></strong>
+        </p>
+    </div>
+    {% else %}
+    <div class="row  justify-content-center">
+      <div class="col col-md-5 col-sm-7 col-10">
+        <h3>Share Post title by Email </h3>
+        <form  action="." method="post">{% csrf_token %}
+          {% bootstrap_field form.name show_label=False placeholder='your name' %}
+          {% bootstrap_field form.email show_label=False placeholder='your email' %}
+          {% bootstrap_field form.to show_label=False placeholder='receiver email' %}
+          {% bootstrap_field form.comment show_label=False placeholder='your comment' %}
+          <button	type="submit"	class="btn btn-outline-success btn-block btn-md"> Share </button>
+        </form>
+      </div>
+    </div>
+    {% endif %}
+
+
+  </div>
+</div>
+</div>
+
+{% endblock %}
